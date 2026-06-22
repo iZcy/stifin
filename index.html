@@ -14,22 +14,66 @@
         <span class="tagline">buat teks AI kedengeran lebih natural</span>
       </div>
       <div class="header-right">
-        <span class="char-count-header" id="headerCounter">0 karakter</span>
+        <div class="apikey-group">
+          <input type="password" class="apikey-input" id="apiKeyInput" placeholder="sk-... DeepSeek API Key">
+          <button class="btn btn-sm" id="toggleKeyBtn">👁️</button>
+          <button class="btn btn-sm btn-primary" id="saveKeyBtn">Simpan</button>
+        </div>
       </div>
     </header>
 
     <main class="main">
       <section class="panel panel-output">
         <div class="panel-header">
-          <span class="panel-label">📋 Hasil Humanize</span>
+          <div class="tab-bar">
+            <button class="tab tab-active" data-tab="result">📋 Hasil</button>
+            <button class="tab" data-tab="profile">🎨 Gaya Saya</button>
+          </div>
         </div>
-        <div class="panel-body">
+
+        <div class="panel-body tab-content" id="tabResult">
           <div class="output-area" id="outputArea">
             <p class="placeholder-text">Hasil humanize akan muncul di sini...</p>
           </div>
+          <div class="output-loader" id="outputLoader">
+            <div class="spinner"></div>
+            <span>DeepSeek sedang nulis ulang...</span>
+          </div>
         </div>
+
+        <div class="panel-body tab-content hidden" id="tabProfile">
+          <div class="profile-section">
+            <p class="profile-desc">Paste 2-3 contoh tulisan aslimu biar system kenal gaya bahasamu.</p>
+
+            <div class="sample-group">
+              <label class="sample-label">Sample 1</label>
+              <textarea class="sample-input" id="sample1" placeholder="Contoh tulisan asli kamu..."></textarea>
+            </div>
+            <div class="sample-group">
+              <label class="sample-label">Sample 2</label>
+              <textarea class="sample-input" id="sample2" placeholder="Contoh tulisan asli kamu..."></textarea>
+            </div>
+            <div class="sample-group">
+              <label class="sample-label">Sample 3</label>
+              <textarea class="sample-input" id="sample3" placeholder="Contoh tulisan asli kamu..."></textarea>
+            </div>
+
+            <button class="btn btn-primary btn-full" id="analyzeBtn">🎯 Analisis Gaya Saya!</button>
+
+            <div class="profile-result hidden" id="profileResult">
+              <div class="profile-result-header">📊 Profil Gaya Bahasamu</div>
+              <div class="profile-badges" id="profileBadges"></div>
+              <div class="profile-detail" id="profileDetail"></div>
+              <div class="profile-prompt-box">
+                <div class="profile-prompt-label">Prompt yang akan dikirim ke DeepSeek:</div>
+                <pre class="profile-prompt-text" id="profilePrompt"></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="panel-footer">
-          <span class="stats" id="outputStats">🔤 0 kata &middot; 0 karakter</span>
+          <span class="stats" id="outputStats">🔤 0 kata · 0 karakter</span>
           <button class="btn btn-copy" id="copyBtn">
             <span class="btn-icon">📋</span> Copy
           </button>
@@ -46,7 +90,7 @@
           <textarea class="input-area" id="inputArea" placeholder="Tempel teks AI di sini..." spellcheck="true"></textarea>
         </div>
         <div class="panel-footer">
-          <span class="stats" id="inputStats">🔤 0 kata &middot; 0 karakter</span>
+          <span class="stats" id="inputStats">🔤 0 kata · 0 karakter</span>
           <button class="btn btn-clear" id="clearBtn">
             <span class="btn-icon">🗑️</span> Hapus
           </button>
